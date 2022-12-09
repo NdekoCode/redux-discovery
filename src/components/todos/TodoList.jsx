@@ -4,8 +4,8 @@ import {
   ADD_TODO_ACTION,
   COMPLETE_TODO_ACTION,
   DELETE_TODO_ACTION,
-  UPDATE_TODO_ACTION,
 } from "../../store";
+import { toggleTodoAction } from "../../store/todos/todosActions";
 import { todosSelectors } from "../../store/todos/todoSelectors";
 import TodoItem from "./TodoItem";
 const TodoList = ({ todos, onDelete, onToggle, allCompleted, addTodo }) => {
@@ -98,11 +98,7 @@ export const TodoStore = connect(
     todos: todosSelectors(state),
   }),
   (dispatch) => ({
-    onToggle: (todo) =>
-      dispatch({
-        type: UPDATE_TODO_ACTION,
-        payload: { ...todo, completed: !todo.completed },
-      }),
+    onToggle: (todo) => dispatch(toggleTodoAction(todo)),
     addTodo: (newTodo) =>
       dispatch({
         type: ADD_TODO_ACTION,
