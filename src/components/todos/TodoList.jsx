@@ -6,6 +6,7 @@ import {
   DELETE_TODO_ACTION,
   UPDATE_TODO_ACTION,
 } from "../../store";
+import { todosSelectors } from "../../store/todos/todoSelectors";
 import TodoItem from "./TodoItem";
 const TodoList = ({ todos, onDelete, onToggle, allCompleted, addTodo }) => {
   const [newTodo, setTodo] = useState("");
@@ -93,7 +94,9 @@ const TodoList = ({ todos, onDelete, onToggle, allCompleted, addTodo }) => {
   );
 };
 export const TodoStore = connect(
-  (state) => ({ todos: state.todos }),
+  (state) => ({
+    todos: todosSelectors(state),
+  }),
   (dispatch) => ({
     onToggle: (todo) =>
       dispatch({
