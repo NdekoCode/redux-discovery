@@ -26,11 +26,11 @@ const TodoList = ({ todos, onToggle, onDelete, allCompleted, addTodo }) => {
       {JSON.stringify(todos)}
       <form
         onSubmit={handleSubmit}
-        className="flex items-center w-56 py-2 px-4 min-w-max"
+        className="flex items-center max-w-[780px] rounded-l-lg active:shadow-lg focus:shadow-lg min-w-max shadow border-t rounded-r-full pr-3"
       >
         <input
           type="text"
-          className="px-2 w-full py-2 shadow border-t"
+          className="px-2 w-full py-2 outline-none"
           value={newTodo}
           onChange={handleTodo}
         />
