@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import {
-  addTodoAction,
-  allCompletedTodoAction,
-  deleteTodoAction,
-  toggleTodoAction,
-} from "../../store/todos/todosActions";
+import { useSelector } from "react-redux";
 import { todosSelectors } from "../../store/todos/todoSelectors";
 import TodoItem from "./TodoItem";
-const TodoList = ({ todos, onDelete, onToggle, allCompleted, addTodo }) => {
+const TodoList = ({ onDelete, onToggle, allCompleted, addTodo }) => {
+  const todos = useSelector(todosSelectors);
   const [newTodo, setTodo] = useState("");
   const handleTodo = (evt) => {
     const value = evt.target.value;
@@ -18,7 +13,6 @@ const TodoList = ({ todos, onDelete, onToggle, allCompleted, addTodo }) => {
     evt.preventDefault();
     if (newTodo.length > 2) {
       addTodo(newTodo);
-
       setTodo("");
     }
   };
@@ -93,7 +87,10 @@ const TodoList = ({ todos, onDelete, onToggle, allCompleted, addTodo }) => {
     </>
   );
 };
-export const TodoStore = connect(
+/**
+ * ===== Redux using connect ==============
+ */
+/* export const TodoStore = connect(
   (state) => ({
     todos: todosSelectors(state),
   }),
@@ -104,5 +101,5 @@ export const TodoStore = connect(
     allCompleted: () => dispatch(allCompletedTodoAction),
   })
 )(TodoList);
-
+ */
 export default TodoList;
