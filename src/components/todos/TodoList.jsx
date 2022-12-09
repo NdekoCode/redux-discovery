@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addTodoAction,
   allCompletedTodoAction,
@@ -8,7 +8,7 @@ import {
 } from "../../store/todos/todosActions";
 import { todosSelectors } from "../../store/todos/todoSelectors";
 import TodoItem from "./TodoItem";
-const TodoList = ({ todos, onDelete, onToggle, allCompleted, addTodo }) => {
+const TodoList = ({ todos, onToggle, onDelete, allCompleted, addTodo }) => {
   const [newTodo, setTodo] = useState("");
   const handleTodo = (evt) => {
     const value = evt.target.value;
@@ -18,7 +18,6 @@ const TodoList = ({ todos, onDelete, onToggle, allCompleted, addTodo }) => {
     evt.preventDefault();
     if (newTodo.length > 2) {
       addTodo(newTodo);
-
       setTodo("");
     }
   };
@@ -93,7 +92,39 @@ const TodoList = ({ todos, onDelete, onToggle, allCompleted, addTodo }) => {
     </>
   );
 };
-export const TodoStore = connect(
+export const TodoListStore = () => {
+  const todos = useSelector(todosSelectors);
+  const dispatch = useDispatch();
+  const onToggle = useCallback(
+    (todo) => dispatch(toggleTodoAction(todo)),
+    [dispatch]
+  );
+  const onDelete = useCallback(
+    (id) => dispatch(deleteTodoAction(id)),
+    [dispatch]
+  );
+  const allCompleted = useCallback(
+    () => dispatch(allCompletedTodoAction()),
+    [dispatch]
+  );
+  const addTodo = useCallback(
+    (newTodo) => dispatch(addTodoAction(newTodo)),
+    [dispatch]
+  );
+  return (
+    <TodoList
+      todos={todos}
+      onDelete={onDelete}
+      onToggle={onToggle}
+      allCompleted={allCompleted}
+      addTodo={addTodo}
+    />
+  );
+};
+/**
+ * ===== Redux using connect ==============
+ */
+/* export const TodoStore = connect(
   (state) => ({
     todos: todosSelectors(state),
   }),
@@ -104,5 +135,5 @@ export const TodoStore = connect(
     allCompleted: () => dispatch(allCompletedTodoAction),
   })
 )(TodoList);
-
+ */
 export default TodoList;
