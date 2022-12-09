@@ -1,9 +1,14 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addTodoAction,
+  allCompletedTodoAction,
+  deleteTodoAction,
+  toggleTodoAction,
+} from "../../store/todos/todosActions";
 import { todosSelectors } from "../../store/todos/todoSelectors";
 import TodoItem from "./TodoItem";
-const TodoList = ({ onDelete, onToggle, allCompleted, addTodo }) => {
-  const todos = useSelector(todosSelectors);
+const TodoList = ({ todos, onToggle, onDelete, allCompleted, addTodo }) => {
   const [newTodo, setTodo] = useState("");
   const handleTodo = (evt) => {
     const value = evt.target.value;
@@ -85,6 +90,35 @@ const TodoList = ({ onDelete, onToggle, allCompleted, addTodo }) => {
         ))}
       </ul>
     </>
+  );
+};
+export const TodoListStore = () => {
+  const todos = useSelector(todosSelectors);
+  const dispatch = useDispatch();
+  const onToggle = useCallback(
+    (todo) => dispatch(toggleTodoAction(todo)),
+    [dispatch]
+  );
+  const onDelete = useCallback(
+    (id) => dispatch(deleteTodoAction(id)),
+    [dispatch]
+  );
+  const allCompleted = useCallback(
+    () => dispatch(allCompletedTodoAction()),
+    [dispatch]
+  );
+  const addTodo = useCallback(
+    (newTodo) => dispatch(addTodoAction(newTodo)),
+    [dispatch]
+  );
+  return (
+    <TodoList
+      todos={todos}
+      onDelete={onDelete}
+      onToggle={onToggle}
+      allCompleted={allCompleted}
+      addTodo={addTodo}
+    />
   );
 };
 /**
