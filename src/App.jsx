@@ -1,9 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import reactLogo from "./assets/react.svg";
+import {
+  ADD_TODO_ACTION,
+  COMPLETE_TODO_ACTION,
+  DELETE_TODO_ACTION,
+  store,
+  UPDATE_TODO_ACTION,
+} from "./store";
+
+// Va permettre d'écouter lorsqu'il y a des nouveaux changement au niveau de votre store, il prend en paramètre une fonction
+store.subscribe(() => store.getState());
+store.dispatch({
+  type: ADD_TODO_ACTION,
+  payload: { title: "Apprendre NextJS" },
+});
+
+console.log(store);
+store.dispatch({ type: DELETE_TODO_ACTION, payload: { id: 3 } });
+store.dispatch({
+  type: UPDATE_TODO_ACTION,
+  payload: { id: 5, title: "Hello guy", completed: true },
+});
+store.dispatch({ type: COMPLETE_TODO_ACTION });
+console.log(store.getState());
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <div className="App">
@@ -28,7 +51,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
