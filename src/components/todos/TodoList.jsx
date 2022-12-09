@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { ADD_TODO_ACTION, COMPLETE_TODO_ACTION } from "../../store";
 import {
+  addTodoAction,
+  allCompletedTodoAction,
   deleteTodoAction,
   toggleTodoAction,
 } from "../../store/todos/todosActions";
@@ -98,13 +99,9 @@ export const TodoStore = connect(
   }),
   (dispatch) => ({
     onToggle: (todo) => dispatch(toggleTodoAction(todo)),
-    addTodo: (newTodo) =>
-      dispatch({
-        type: ADD_TODO_ACTION,
-        payload: { title: newTodo },
-      }),
+    addTodo: (newTodo) => dispatch(addTodoAction(newTodo)),
     onDelete: (id) => dispatch(deleteTodoAction(id)),
-    allCompleted: () => dispatch({ type: COMPLETE_TODO_ACTION }),
+    allCompleted: () => dispatch(allCompletedTodoAction),
   })
 )(TodoList);
 
