@@ -97,7 +97,10 @@ const newState = todoReducer(myState, {
   },
 });
 
-const store = createStore(todoReducer);
+const store = createStore(
+  todoReducer,
+  +window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 // Va permettre d'écouter lorsqu'il y a des nouveaux changement au niveau de votre store
 store.subscribe(() => store.getState());
 store.dispatch({
