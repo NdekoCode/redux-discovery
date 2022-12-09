@@ -1,5 +1,5 @@
 import { combineReducers, createStore } from "redux";
-import todoReducer from "./todoReducer";
+import todoReducer from "./todos/todoReducer";
 
 // Je créer mes actions
 export const ADD_TODO_ACTION = "ADD_TODO_ACTION";

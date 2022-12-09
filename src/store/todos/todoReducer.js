@@ -3,10 +3,10 @@ import {
   COMPLETE_TODO_ACTION,
   DELETE_TODO_ACTION,
   UPDATE_TODO_ACTION,
-} from ".";
-import { initialTodosValue } from "./defaultValuesState";
+} from "..";
+import { initialTodosValue } from "../defaultValuesState";
 
-let id = 10;
+let id = 5;
 
 /**
  * @description Est un reducer pour le todoList
@@ -22,14 +22,17 @@ let id = 10;
 export default function todoReducer(state = initialTodosValue, action = {}) {
   switch (action.type) {
     case ADD_TODO_ACTION:
-      return [...state, { id: id++, completed: false, ...action.payload }];
+      return [{ id: ++id, completed: false, ...action.payload }, ...state];
     case DELETE_TODO_ACTION:
-      return state.filter((d) => d.id !== action.payload.id);
+      return state.filter((d) => {
+        console.log(action.payload.id);
+        return d.id !== action.payload.id;
+      });
     case UPDATE_TODO_ACTION:
       return state.map((d) => {
         if (d.id === action.payload.id) {
-          d.completed = action.payload.completed;
-          d.title = action.payload.title;
+          // Si les identifiant correspondent alors retourne l'objet qui correspond à celui que l'on a dans le store et ajoute y ce que l'on a dans le payload
+          return { ...d, ...action.payload };
         }
         return d;
       });

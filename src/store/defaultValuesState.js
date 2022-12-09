@@ -25,29 +25,4 @@ export const initialTodosValue = [
     title: "Solve a Rubik's cube",
     completed: false,
   },
-  {
-    id: 6,
-    title: "Bake pastries for me and neighbor",
-    completed: false,
-  },
-  {
-    id: 7,
-    title: "Go see a Broadway production",
-    completed: false,
-  },
-  {
-    id: 8,
-    title: "Write a thank you letter to an influential person in my life",
-    completed: true,
-  },
-  {
-    id: 9,
-    title: "Invite some friends over for a game night",
-    completed: false,
-  },
-  {
-    id: 10,
-    title: "Have a football scrimmage with some friends",
-    completed: false,
-  },
 ];
