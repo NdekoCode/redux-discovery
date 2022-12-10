@@ -1,12 +1,12 @@
 import React, { memo, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filteredTodoSelector } from "../../store/filter/filterSelectors";
 import {
   addTodoAction,
   allCompletedTodoAction,
   deleteTodoAction,
   toggleTodoAction,
 } from "../../store/todos/todosActions";
+import { filteredTodoSelector } from "../../store/todos/todoSelectors";
 import TodoItem from "./TodoItem";
 const TodoList = memo(
   ({ todos, onToggle, onDelete, allCompleted, addTodo }) => {
