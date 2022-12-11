@@ -19,7 +19,6 @@ const store = createStore(
   combineReducers({
     todos: todoReducer,
     filter: filterReducer,
-    incr: incr,
   }),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
