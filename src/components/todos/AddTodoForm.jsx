@@ -8,11 +8,13 @@ const AddTodoForm = () => {
   const [loading, setLoading] = useState(false);
   const handleSubmit = useCallback(async (evt) => {
     evt.preventDefault();
-    if (input.current.value.length > 2) {
+    const value = input.current.value;
+    input.current.value = "";
+    if (value.length > 2) {
       setLoading(true);
-      await dispatch(addTodoAction(input.current.value));
+      await dispatch(addTodoAction(value));
       setLoading(false);
-      input.current.value = "";
+
       input.current.focus();
     }
   });
@@ -23,6 +25,7 @@ const AddTodoForm = () => {
     >
       <input
         type="text"
+        placeholder={loading ? "Chargement..." : "Entrer une tache"}
         className="px-2 w-full py-2 outline-none"
         ref={input}
       />
