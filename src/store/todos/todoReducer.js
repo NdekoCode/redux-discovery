@@ -1,3 +1,4 @@
+import { v4 as uuid } from "uuid";
 import {
   ADD_TODO_ACTION,
   COMPLETE_TODO_ACTION,
@@ -5,8 +6,6 @@ import {
   UPDATE_TODO_ACTION,
 } from "..";
 import { initialTodosValue } from "../defaultValuesState";
-
-let id = 5;
 
 /**
  * @description Est un reducer pour le todoList
@@ -22,7 +21,7 @@ let id = 5;
 export default function todoReducer(state = initialTodosValue, action = {}) {
   switch (action.type) {
     case ADD_TODO_ACTION:
-      return [{ id: ++id, completed: false, ...action.payload }, ...state];
+      return [{ id: uuid(), completed: false, ...action.payload }, ...state];
     case DELETE_TODO_ACTION:
       return state.filter((d) => {
         console.log(action.payload.id);
