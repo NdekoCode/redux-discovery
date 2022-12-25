@@ -1,27 +1,28 @@
+import { v4 as uuid } from "uuid";
 export const initialTodosValue = [
   {
-    id: 1,
+    id: uuid(),
     title: "Do something nice for someone I care about",
     completed: true,
   },
   {
-    id: 2,
+    id: uuid(),
     title: "Memorize the fifty states and their capitals",
     completed: false,
   },
   {
-    id: 3,
+    id: uuid(),
     title: "Watch a classic movie",
     completed: false,
   },
   {
-    id: 4,
+    id: uuid(),
     title:
       "Contribute code or a monetary donation to an open-source software project",
     completed: false,
   },
   {
-    id: 5,
+    id: uuid(),
     title: "Solve a Rubik's cube",
     completed: false,
   },

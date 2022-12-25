@@ -1,4 +1,10 @@
-import { combineReducers, legacy_createStore as createStore } from "redux";
+import { composeWithDevTools } from "@redux-devtools/extension";
+import {
+  applyMiddleware,
+  combineReducers,
+  legacy_createStore as createStore,
+} from "redux";
+import thunk from "redux-thunk";
 import { filterReducer } from "./filter/filterReducer";
 import todoReducer from "./todos/todoReducer";
 
@@ -20,7 +26,8 @@ const store = createStore(
     todos: todoReducer,
     filter: filterReducer,
   }),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(applyMiddleware(thunk)) /* 
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() */
 );
 /* const increment = () => store.dispatch({ type: "incr" });
 window.setInterval(increment, 1000); */

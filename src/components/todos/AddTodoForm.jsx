@@ -1,15 +1,20 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodoAction } from "../../store/todos/todosActions";
 
 const AddTodoForm = () => {
   const dispatch = useDispatch();
   const input = useRef("");
-  const handleSubmit = useCallback((evt) => {
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = useCallback(async (evt) => {
     evt.preventDefault();
-    if (input.current.value.length > 2) {
-      dispatch(addTodoAction(input.current.value));
-      input.current.value = "";
+    const value = input.current.value;
+    input.current.value = "";
+    if (value.length > 2) {
+      setLoading(true);
+      await dispatch(addTodoAction(value));
+      setLoading(false);
+
       input.current.focus();
     }
   });
@@ -20,10 +25,15 @@ const AddTodoForm = () => {
     >
       <input
         type="text"
+        placeholder={loading ? "Chargement..." : "Entrer une tache"}
         className="px-2 w-full py-2 outline-none"
         ref={input}
       />
-      <button type="submit" className="text-gray-500">
+      <button
+        type="submit"
+        disabled={loading}
+        className="text-gray-500 disabled:opacity-75 disabled:text-gray-300"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="ionicon h-8 w-8"
