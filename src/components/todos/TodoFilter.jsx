@@ -4,7 +4,6 @@ import { setFilterAction } from "../../store/filter/filterActions";
 import { filterSelector } from "../../store/filter/filterSelectors";
 
 const TodoFilter = ({ filter, onChange }) => {
-  console.log(filter);
   return (
     <div>
       <button
