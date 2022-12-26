@@ -9,10 +9,12 @@ import { filterReducer } from "./filter/filterReducer";
 import todoReducer from "./todos/todoReducer";
 
 // Je créer mes actions
-export const ADD_TODO_ACTION = "ADD_TODO_ACTION";
-export const DELETE_TODO_ACTION = "DELETE_TODO_ACTION";
-export const UPDATE_TODO_ACTION = "UPDATE_TODO_ACTION";
-export const COMPLETE_TODO_ACTION = "COMPLETE_TODO_ACTION";
+export const ACTIONS = {
+  ADD_TODO_ACTION: "ADD_TODO_ACTION",
+  DELETE_TODO_ACTION: "DELETE_TODO_ACTION",
+  UPDATE_TODO_ACTION: "UPDATE_TODO_ACTION",
+  COMPLETE_TODO_ACTION: "COMPLETE_TODO_ACTION",
+};
 
 /* const incr = function (state = 0, action) {
   if (action.type === "incr") {
