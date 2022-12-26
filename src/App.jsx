@@ -1,14 +1,16 @@
-import { Provider } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { TodoFilterStore } from "./components/todos/TodoFilter";
-import { TodoListStore } from "./components/todos/TodoList";
-import store from "./store";
+import Counter from "./components/pages/Counter";
+import PageContent from "./components/pages/PageContent";
+import Todos from "./components/pages/Todos";
 function App() {
   return (
-    <Provider store={store}>
-      <TodoFilterStore />
-      <TodoListStore />
-    </Provider>
+    <PageContent>
+      <Routes>
+        <Route path="/todos" element={<Todos />} />
+        <Route path="/counter" element={<Counter />} />
+      </Routes>
+    </PageContent>
   );
 }
 
