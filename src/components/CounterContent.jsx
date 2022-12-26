@@ -2,9 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { decrementAction, incrementAction } from "../store/counter/actions";
 import { getCount } from "../store/counter/selectors";
-import actions, { Lol } from "./libs/actions";
 const CounterContent = ({ count, increment, decrement }) => {
-  console.log(actions.counterDecrement(), Lol());
   return (
     <div className="p-12 shadow-lg rounded-lg flex items-center justify-center">
       <div className="custom-number-input  w-32">

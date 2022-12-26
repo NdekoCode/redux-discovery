@@ -1,8 +1,8 @@
-import { DECREMENT, INCREMENT } from "./typesActions";
+import ACTIONS from "./typesActions";
 
 export const incrementAction = {
-  type: INCREMENT,
+  type: ACTIONS.INCREMENT,
 };
 export const decrementAction = {
-  type: DECREMENT,
+  type: ACTIONS.DECREMENT,
 };

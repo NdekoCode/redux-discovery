@@ -1,2 +1,5 @@
-export const INCREMENT = "INCREMENT";
-export const DECREMENT = "DECREMENT";
+const ACTIONS = {
+  INCREMENT: "INCREMENT",
+  DECREMENT: "DECREMENT",
+};
+export default ACTIONS;
