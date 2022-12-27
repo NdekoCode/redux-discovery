@@ -1,6 +1,7 @@
-import { DECREMENT, INCREMENT } from "./typesActions";
+import ACTIONS from "./typesActions";
 
 export function counterReducer(state = 0, action) {
+  const { INCREMENT, DECREMENT } = ACTIONS;
   switch (action.type) {
     case INCREMENT:
       return state + 1;

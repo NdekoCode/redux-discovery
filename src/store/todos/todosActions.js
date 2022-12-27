@@ -1,11 +1,11 @@
-import {
+import { ACTIONS } from "..";
+import wait from "../../utils/wait";
+const {
   ADD_TODO_ACTION,
   COMPLETE_TODO_ACTION,
   DELETE_TODO_ACTION,
   UPDATE_TODO_ACTION,
-} from "..";
-import wait from "../../utils/wait";
-
+} = ACTIONS;
 export const toggleTodoAction = (todo) => ({
   type: UPDATE_TODO_ACTION,
   payload: { ...todo, completed: !todo.completed },

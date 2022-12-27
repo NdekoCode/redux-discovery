@@ -1,5 +1,5 @@
-import { DECREMENT, INCREMENT } from "./typesActions";
-
+import ACTIONS from "./typesActions";
+const { INCREMENT, DECREMENT } = ACTIONS;
 export const incrementAction = {
   type: INCREMENT,
 };

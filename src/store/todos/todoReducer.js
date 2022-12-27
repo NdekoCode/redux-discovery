@@ -1,10 +1,5 @@
 import { v4 as uuid } from "uuid";
-import {
-  ADD_TODO_ACTION,
-  COMPLETE_TODO_ACTION,
-  DELETE_TODO_ACTION,
-  UPDATE_TODO_ACTION,
-} from "..";
+import { ACTIONS } from "..";
 import { initialTodosValue } from "../defaultValuesState";
 
 /**
@@ -19,6 +14,12 @@ import { initialTodosValue } from "../defaultValuesState";
  * @return {*}
  */
 export default function todoReducer(state = initialTodosValue, action = {}) {
+  const {
+    ADD_TODO_ACTION,
+    COMPLETE_TODO_ACTION,
+    DELETE_TODO_ACTION,
+    UPDATE_TODO_ACTION,
+  } = ACTIONS;
   switch (action.type) {
     case ADD_TODO_ACTION:
       return [{ id: uuid(), completed: false, ...action.payload }, ...state];
