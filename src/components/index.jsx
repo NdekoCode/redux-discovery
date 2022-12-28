@@ -7,11 +7,12 @@ const Components = {
     name,
     value,
     onChange,
+    className = "fade",
     width = "100%",
   }) {
     return (
       <input
-        className="p-3 py-2 rounded-md border border-gray-300 focus:ring focus:ring-offset-2 focus:ring-blue-200 transition-all duration-300 mb-1"
+        className={`p-3 py-2 rounded-md border border-gray-300 focus:ring focus:ring-offset-2 focus:ring-blue-200 transition-all duration-300 mb-1  ${className}`}
         style={{ width: width, background: "#f8f9fa" }}
         type={type}
         defaultValue={value}

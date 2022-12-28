@@ -1,32 +1,36 @@
-import React, { useCallback, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import Components from ".";
+import ButtonEdit from "./ButtonEdit";
+import RemoveButton from "./RemoveButton";
+import SaveButton from "./SaveButton";
 
-function Row(props) {
+const Row = memo((props) => {
   const { edit, remove } = props;
   const [isEditing, setEditing] = useState(false);
   const [isVisible, setVisible] = useState(false);
   const [contact, setContact] = useState({ ...props.contact });
   const handleOnChange = useCallback((e) => {
+    const [name, value] = [e.target.name, e.target.value];
     setContact((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   });
-  const editCtc = () => setEditing(true);
-  const save = () => {
-    setEditing(false);
-  };
-  const removeCtc = () => {
+  const editCtc = useCallback(() => setEditing(true), [isEditing]);
+  const save = useCallback(() => setEditing(false), [isEditing]);
+  const removeCtc = useCallback(() => {
     const input = window.confirm(
       "are you sure you want to delete this contact ?"
     );
-  };
-  const show = () => {};
-  const hide = () => {};
+  });
+  const show = useCallback(() => setVisible(true), [isVisible]);
+  const hide = useCallback(() => setVisible(false), [isVisible]);
   return (
     <div
       href="#"
-      className="justify-between p-3 border-b border-gray-300"
+      className={`p-3 border-b border-gray-200 hover:bg-gray-100 cursor-pointer transition-all duration-300 fade ${
+        isVisible ? " min-h-[130px]" : " min-h-[120px]"
+      }`}
       aria-current="true"
       onMouseEnter={show}
       onMouseLeave={hide}
@@ -45,7 +49,7 @@ function Row(props) {
         </p>
         <small className="text-gray-600">{contact.category}</small>
       </div>
-      <ul className="list-disc list-inside">
+      <ul className="list-disc list-inside flex ">
         {!isEditing ? (
           <li className="text-gray-600 pl-3">{contact.email}</li>
         ) : (
@@ -71,19 +75,19 @@ function Row(props) {
         )}
       </ul>
       {isVisible ? (
-        <ul className="list-controls list-inline">
+        <ul className="list-controls list-inline flex justify-end fadeIn">
           {!isEditing && (
-            <li className="list-inline-item controls" onClick={editCtc}>
-              <i className="fas fa-pen"></i> edit
+            <li>
+              <ButtonEdit onClick={editCtc} />
             </li>
           )}
           {isEditing && (
-            <li className="list-inline-item controls" onClick={save}>
-              <i className="fas fa-save"></i> save
+            <li>
+              <SaveButton onClick={save} />
             </li>
           )}
-          <li className="list-inline-item controls" onClick={removeCtc}>
-            <i className="fas fa-trash"></i> delete
+          <li>
+            <RemoveButton onClick={removeCtc} />
           </li>
         </ul>
       ) : (
@@ -91,5 +95,5 @@ function Row(props) {
       )}
     </div>
   );
-}
+});
 export default Row;
