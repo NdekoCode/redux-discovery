@@ -1,5 +1,5 @@
 import Components from "app/components/";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Modal from "./Modal";
@@ -14,13 +14,13 @@ const initialState = {
 function AddContactModal() {
   const filters = ["business", "friends", "family"];
   const [contact, setContact] = useState({ ...initialState });
-  const save = () => {};
-  const handleOnChange = (e) => {
+  const save = useCallback(() => {}, []);
+  const handleOnChange = useCallback((e) => {
     setContact((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.name === "phone" ? e.value : e.target.value,
     }));
-  };
+  }, []);
   return (
     <Modal save={save} title="Add New Contact :">
       <Components.Select

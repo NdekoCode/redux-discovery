@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Components from ".";
 
 function Row(props) {
@@ -6,12 +6,12 @@ function Row(props) {
   const [isEditing, setEditing] = useState(false);
   const [isVisible, setVisible] = useState(false);
   const [contact, setContact] = useState({ ...props.contact });
-  const handleOnChange = (e) => {
+  const handleOnChange = useCallback((e) => {
     setContact((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-  };
+  });
   const editCtc = () => setEditing(true);
   const save = () => {
     setEditing(false);
@@ -26,13 +26,13 @@ function Row(props) {
   return (
     <div
       href="#"
-      className="justify-content-between list-group-item list-group-item-action"
+      className="justify-between p-3 border-b border-gray-300"
       aria-current="true"
       onMouseEnter={show}
       onMouseLeave={hide}
     >
-      <div className="mb-1 d-flex w-100 justify-content-between">
-        <p className="mb-1 name">
+      <div className="mb-1 flex w-full justify-between">
+        <p className="mb-1 name text-gray-600 text-xl">
           {!isEditing ? (
             contact.name
           ) : (
@@ -43,11 +43,11 @@ function Row(props) {
             />
           )}
         </p>
-        <small>{contact.category}</small>
+        <small className="text-gray-600">{contact.category}</small>
       </div>
-      <ul>
+      <ul className="list-disc list-inside">
         {!isEditing ? (
-          <li>{contact.email}</li>
+          <li className="text-gray-600 pl-3">{contact.email}</li>
         ) : (
           <Components.Input
             name="email"
@@ -59,7 +59,7 @@ function Row(props) {
         )}
 
         {!isEditing ? (
-          <li>{contact.phone}</li>
+          <li className="text-gray-600 pl-3">{contact.phone}</li>
         ) : (
           <Components.Input
             name="phone"

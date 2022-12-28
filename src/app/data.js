@@ -1,4 +1,4 @@
-module.exports = [
+export const dataContacts = [
   {
     id: 1,
     name: "Judith L",

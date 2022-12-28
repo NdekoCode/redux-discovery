@@ -1,4 +1,4 @@
-import "app/utils";
+import "../app/utils";
 
 const Components = {
   Input: function ({
@@ -11,7 +11,7 @@ const Components = {
   }) {
     return (
       <input
-        className="form-control form-control-sm mb-1"
+        className="p-3 py-2 rounded-md border border-gray-300 focus:ring focus:ring-offset-2 focus:ring-blue-200 transition-all duration-300 mb-1"
         style={{ width: width, background: "#f8f9fa" }}
         type={type}
         defaultValue={value}
@@ -22,26 +22,22 @@ const Components = {
   },
   Badge: function ({ filter }) {
     return (
-      <span
-        className="badge rounded-pill filter-pill"
-        onClick={() => null}
-        aria-current={filter}
-      >
+      <span className="p-2 text-sm" onClick={() => null} aria-current={filter}>
         {filter}
       </span>
     );
   },
   ContactInput: function ({ name, value, type = "text", onChange }) {
     return (
-      <div className="row mb-3">
-        <label htmlFor={name} className="col-sm-2 col-form-label">
+      <div className="flex mb-3">
+        <label htmlFor={name} className="w-full md:basis-1/4 mb-1 text-base">
           {name} :
         </label>
-        <div className="col-sm-8">
+        <div className="w-full md:basis-1/3">
           <input
             type={type}
             name={name}
-            className="form-control"
+            className="p-3 py-2 rounded-md border border-gray-300 focus:ring focus:ring-offset-2 focus:ring-blue-200 transition-all duration-300 mb-1"
             id={name}
             value={value}
             onChange={onChange}
@@ -53,13 +49,16 @@ const Components = {
   Select: function ({ children, name, value, onChange }) {
     return (
       <div className="d-flex mb-3">
-        <label htmlFor="category" className="col-sm-2 col-form-label">
+        <label
+          htmlFor="category"
+          className="w-full md:basis-1/3 mb-1 text-base"
+        >
           category :
         </label>
-        <div className="d-flex flex-column">
+        <div className="flex flex-col">
           <select
             id="category"
-            className="col-sm-4 form-select"
+            className="md:basis-1/3 p-3 py-2 rounded-md border border-gray-300 focus:ring focus:ring-offset-2 focus:ring-blue-200 transition-all duration-300 mb-1"
             name={name}
             aria-label={name}
             onChange={onChange}
