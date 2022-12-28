@@ -6,7 +6,7 @@ import { TodoListStore } from "../todos/TodoList";
 function Todos() {
   return (
     <Provider store={store}>
-      <main className="p-5">
+      <main className="p-5 min-h-[500px] min-w-[250px]">
         <TodoFilterStore />
         <TodoListStore />
       </main>

@@ -1,4 +1,10 @@
-import React, { createRef, useCallback, useEffect, useState } from "react";
+import React, {
+  createRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import Components from "../contacts";
 import { dataContacts } from "../contacts/libs/data";
 import "../contacts/libs/utils";
@@ -26,9 +32,18 @@ const Contact = () => {
   const filters = ["🏢 business", "👬 friends", "👪 family"];
   const [selectedFilter, setFilter] = useState(null);
   const selectFilter = useCallback((filter) => {
+    if (filter.unshiftFrom(3) === selectedFilter) {
+      return setFilter(null);
+    }
     const sub = filter.unshiftFrom(3);
     setFilter(sub);
   });
+  const contactsList = useMemo(() => {
+    if (!selectedFilter) {
+      return dataContacts;
+    }
+    return dataContacts.filterList(selectedFilter);
+  }, [selectedFilter, dataContacts]);
   useEffect(() => {
     ref.current.scrollTo({
       top: 0,
@@ -36,7 +51,7 @@ const Contact = () => {
     });
   }, [ref]);
   return (
-    <div className="container md:w-full mx-auto mt-5">
+    <div className="container md:w-full mx-auto mt-5 min-h-[500px]">
       {/* ajouter nouveau contact (modal) */}
       <div className="content flex justify-center items-center ">
         <div className="contacts-list  w-full list-group border border-gray-300 rounded-b-md rounded-t-md border-t-0">
@@ -58,7 +73,7 @@ const Contact = () => {
               </div>
 
               <div
-                className="d-flex justify-content-around"
+                className="flex justify-around gap-1 mt-3"
                 style={{ width: "250px" }}
               >
                 {filters.map((filter) => (
@@ -74,7 +89,7 @@ const Contact = () => {
           </a>
           <div className="list-scroll overflow-y-auto max-h-80" ref={ref}>
             {/* afficher contacts */}
-            {dataContacts.map((contact) => (
+            {contactsList.map((contact) => (
               <Row key={contact.id} contact={contact} />
             ))}
           </div>
