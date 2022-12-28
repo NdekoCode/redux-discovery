@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { decrementAction, incrementAction } from "../store/counter/actions";
-import { getCount } from "../store/counter/selectors";
+import { decrementAction, incrementAction } from "../../store/counter/actions";
+import { getCount } from "../../store/counter/selectors";
 const CounterContent = ({ count, increment, decrement }) => {
   return (
     <div className="p-12 shadow-lg rounded-lg flex items-center justify-center">
