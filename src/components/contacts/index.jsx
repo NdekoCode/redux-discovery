@@ -1,4 +1,4 @@
-import "../app/utils";
+import "./libs/utils";
 
 const Components = {
   Input: function ({
@@ -21,11 +21,16 @@ const Components = {
       />
     );
   },
-  Badge: function ({ filter }) {
+  Badge: function ({ filter, setFilter, selectedFilter }) {
     return (
-      <span className="p-2 text-sm" onClick={() => null} aria-current={filter}>
+      <button
+        disabled={filter.unshiftFrom(3) === selectedFilter}
+        className="px-2 py-1 text-sm disabled:bg-blue-400 rounded-lg disabled:curs"
+        onClick={() => setFilter(filter)}
+        aria-current={filter}
+      >
         {filter}
-      </span>
+      </button>
     );
   },
   ContactInput: function ({ name, value, type = "text", onChange }) {

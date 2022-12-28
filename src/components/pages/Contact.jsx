@@ -1,7 +1,8 @@
-import React, { createRef, useEffect } from "react";
-import Components from "..";
-import { dataContacts } from "../../app/data";
-import Row from "../Row";
+import React, { createRef, useCallback, useEffect, useState } from "react";
+import Components from "../contacts";
+import { dataContacts } from "../contacts/libs/data";
+import "../contacts/libs/utils";
+import Row from "../contacts/Row";
 
 const styles = {
   h1: {
@@ -23,6 +24,11 @@ const styles = {
 const Contact = () => {
   const ref = createRef();
   const filters = ["🏢 business", "👬 friends", "👪 family"];
+  const [selectedFilter, setFilter] = useState(null);
+  const selectFilter = useCallback((filter) => {
+    const sub = filter.unshiftFrom(3);
+    setFilter(sub);
+  });
   useEffect(() => {
     ref.current.scrollTo({
       top: 0,
@@ -56,7 +62,12 @@ const Contact = () => {
                 style={{ width: "250px" }}
               >
                 {filters.map((filter) => (
-                  <Components.Badge key={filter} filter={filter} />
+                  <Components.Badge
+                    setFilter={selectFilter}
+                    selectedFilter={selectedFilter}
+                    key={filter}
+                    filter={filter}
+                  />
                 ))}
               </div>
             </div>
