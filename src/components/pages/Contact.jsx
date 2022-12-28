@@ -1,8 +1,16 @@
-import React, { createRef, useCallback, useEffect, useState } from "react";
+import React, {
+  createRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import AddContactModal from "../AddContactModal";
 import Components from "../contacts";
 import { dataContacts } from "../contacts/libs/data";
 import "../contacts/libs/utils";
 import Row from "../contacts/Row";
+import { useFormValidation } from "../hooks/useFormValidation";
 
 const styles = {
   h1: {
@@ -23,12 +31,23 @@ const styles = {
 };
 const Contact = () => {
   const ref = createRef();
+  const { isVisible, handleToggle } = useFormValidation();
+  console.log(handleToggle);
   const filters = ["🏢 business", "👬 friends", "👪 family"];
   const [selectedFilter, setFilter] = useState(null);
   const selectFilter = useCallback((filter) => {
+    if (filter.unshiftFrom(3) === selectedFilter) {
+      return setFilter(null);
+    }
     const sub = filter.unshiftFrom(3);
     setFilter(sub);
   });
+  const contactsList = useMemo(() => {
+    if (!selectedFilter) {
+      return dataContacts;
+    }
+    return dataContacts.filterList(selectedFilter);
+  }, [selectedFilter, dataContacts]);
   useEffect(() => {
     ref.current.scrollTo({
       top: 0,
@@ -36,8 +55,9 @@ const Contact = () => {
     });
   }, [ref]);
   return (
-    <div className="container md:w-full mx-auto mt-5">
+    <div className="container md:w-full mx-auto mt-5 min-h-[500px]">
       {/* ajouter nouveau contact (modal) */}
+      {isVisible && <AddContactModal />}
       <div className="content flex justify-center items-center ">
         <div className="contacts-list  w-full list-group border border-gray-300 rounded-b-md rounded-t-md border-t-0">
           <a
@@ -49,6 +69,7 @@ const Contact = () => {
               <div className="flex items-center" style={{ width: "170px" }}>
                 <h5 className="mr-2">Contacts List</h5>
                 <button
+                  onClick={handleToggle}
                   className="p-2 bg-gray-50 text-gray-700 rounded-md"
                   data-bs-toggle="modal"
                   data-bs-target="#addContact"
@@ -58,7 +79,7 @@ const Contact = () => {
               </div>
 
               <div
-                className="d-flex justify-content-around"
+                className="flex justify-around gap-1 mt-3"
                 style={{ width: "250px" }}
               >
                 {filters.map((filter) => (
@@ -74,7 +95,7 @@ const Contact = () => {
           </a>
           <div className="list-scroll overflow-y-auto max-h-80" ref={ref}>
             {/* afficher contacts */}
-            {dataContacts.map((contact) => (
+            {contactsList.map((contact) => (
               <Row key={contact.id} contact={contact} />
             ))}
           </div>
