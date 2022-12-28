@@ -1,7 +1,7 @@
-import Components from "app/components/";
 import { useCallback, useState } from "react";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import Components from "../contacts";
 import Modal from "./Modal";
 
 const initialState = {
@@ -16,9 +16,10 @@ function AddContactModal() {
   const [contact, setContact] = useState({ ...initialState });
   const save = useCallback(() => {}, []);
   const handleOnChange = useCallback((e) => {
+    const [name, value] = [e.target.name, e.target.value];
     setContact((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.name === "phone" ? e.value : e.target.value,
+      [name]: name === "phone" ? e.value : value,
     }));
   }, []);
   return (
@@ -49,7 +50,7 @@ function AddContactModal() {
         onChange={handleOnChange}
       />
       <ReactPhoneInput
-        country={"fr"}
+        country={"cd"}
         value={contact?.phone || ""}
         onChange={(e) =>
           handleOnChange({ value: e, target: { name: "phone" } })
