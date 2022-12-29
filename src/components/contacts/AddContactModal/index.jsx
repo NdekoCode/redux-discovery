@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { connect } from "react-redux";
 import { v4 as uuid } from "uuid";
-import Components from "../contacts";
-import { useFormValidation } from "../hooks/useFormValidation";
+import Components from "..";
+import { addContact } from "../../../libs/store/contacts/actions";
+import { useFormValidation } from "../../hooks/useFormValidation";
 import Modal from "./Modal";
 
 const initialState = {
@@ -13,11 +15,11 @@ const initialState = {
   phone: null,
   category: "business",
 };
-function AddContactModal({ addContact }) {
+function AddContactModal({ add }) {
   const filters = ["business", "friends", "family"];
   const [contact, setContact] = useState({ ...initialState });
   const { validate, isValid, handleToggle } = useFormValidation();
-  const save = useCallback(() => {
+  const save = () => {
     if (isValid) {
       const newContact = {
         id: uuid(),
@@ -26,17 +28,10 @@ function AddContactModal({ addContact }) {
         phone: contact.phone,
         category: contact.category,
       };
-      addContact(newContact);
-      setContact({
-        first: "",
-        last: "",
-        email: "",
-        phone: "",
-        category: "business",
-      });
+      add(newContact);
       handleToggle(false);
     }
-  }, [contact, addContact]);
+  };
   const handleOnChange = useCallback((e) => {
     const [name, value] = [e.target.name, e.target.value];
     setContact((prevState) => ({
@@ -90,5 +85,8 @@ function AddContactModal({ addContact }) {
     </Modal>
   );
 }
-
-export default AddContactModal;
+const mapDispatchToProps = (dispatch) => ({
+  add: (action) => dispatch(addContact(action)),
+});
+const AddContactStore = connect(null, mapDispatchToProps)(AddContactModal);
+export default AddContactStore;

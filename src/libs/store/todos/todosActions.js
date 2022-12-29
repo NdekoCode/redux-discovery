@@ -1,5 +1,5 @@
 import { ACTIONS } from "..";
-import wait from "../../utils/wait";
+import wait from "../../../utils/wait";
 const {
   ADD_TODO_ACTION,
   COMPLETE_TODO_ACTION,

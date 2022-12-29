@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { decrementAction, incrementAction } from "../../store/counter/actions";
-import { getCount } from "../../store/counter/selectors";
+import {
+  decrementAction,
+  incrementAction,
+} from "../../libs/store/counter/actions";
+import { getCount } from "../../libs/store/counter/selectors";
 const CounterContent = ({ count, increment, decrement }) => {
+  useEffect(() => {
+    document.title = "Counter";
+  }, []);
   return (
     <div className="p-12 shadow-lg rounded-lg flex items-center justify-center">
       <div className="custom-number-input  w-32">
@@ -21,7 +27,7 @@ const CounterContent = ({ count, increment, decrement }) => {
             <span className="m-auto text-2xl font-thin">−</span>
           </button>
           <div className=" flex justify-center outline-none focus:outline-none text-center w-full bg-gray-300 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default items-center text-gray-700  ">
-            {count}
+            {JSON.stringify(count, null, 2)}
           </div>
           <button
             onClick={increment}

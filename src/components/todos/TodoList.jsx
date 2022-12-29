@@ -5,8 +5,8 @@ import {
   allCompletedTodoAction,
   deleteTodoAction,
   toggleTodoAction,
-} from "../../store/todos/todosActions";
-import { filteredTodoSelector } from "../../store/todos/todoSelectors";
+} from "../..//libs/store/todos/todosActions";
+import { filteredTodoSelector } from "../../libs/store/todos/todoSelectors";
 import AddTodoForm from "./AddTodoForm";
 import TodoItem from "./TodoItem";
 const TodoList = memo(

@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodoAction } from "../../store/todos/todosActions";
+import { addTodoAction } from "../../libs/store/todos/todosActions";
 
 const AddTodoForm = () => {
   const dispatch = useDispatch();
