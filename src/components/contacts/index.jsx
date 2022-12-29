@@ -12,7 +12,7 @@ const Components = {
   }) {
     return (
       <input
-        className={`p-3 py-2 rounded-md border border-gray-300 focus:ring focus:ring-offset-2 focus:ring-blue-200 transition-all duration-300 mb-1  ${className}`}
+        className={`p-3 py-2 w-full rounded-md border border-gray-300 focus:ring focus:ring-offset-2 focus:ring-blue-200 transition-all duration-300 mb-1  ${className}`}
         style={{ width: width, background: "#f8f9fa" }}
         type={type}
         defaultValue={value}
@@ -35,15 +35,15 @@ const Components = {
   },
   ContactInput: function ({ name, value, type = "text", onChange }) {
     return (
-      <div className="flex mb-3">
+      <div className="flex mb-3 w-full">
         <label htmlFor={name} className="w-full md:basis-1/4 mb-1 text-base">
           {name} :
         </label>
-        <div className="w-full md:basis-1/3">
+        <div className="w-full ">
           <input
             type={type}
             name={name}
-            className="p-3 py-2 rounded-md border border-gray-300 focus:ring focus:ring-offset-2 focus:ring-blue-200 transition-all duration-300 mb-1"
+            className="w-full p-3 py-2 rounded-md border border-gray-300 focus:ring focus:ring-offset-2 focus:ring-blue-200 transition-all duration-300 mb-1"
             id={name}
             value={value}
             onChange={onChange}
@@ -54,7 +54,7 @@ const Components = {
   },
   Select: function ({ children, name, value, onChange }) {
     return (
-      <div className="d-flex mb-3">
+      <div className="flex mb-3 w-full">
         <label
           htmlFor="category"
           className="w-full md:basis-1/3 mb-1 text-base"
@@ -64,7 +64,7 @@ const Components = {
         <div className="flex flex-col">
           <select
             id="category"
-            className="md:basis-1/3 p-3 py-2 rounded-md border border-gray-300 focus:ring focus:ring-offset-2 focus:ring-blue-200 transition-all duration-300 mb-1"
+            className="p-3 py-2 rounded-md border border-gray-300 focus:ring focus:ring-offset-2 focus:ring-blue-200 transition-all duration-300 mb-1"
             name={name}
             aria-label={name}
             onChange={onChange}

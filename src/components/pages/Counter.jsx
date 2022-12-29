@@ -5,7 +5,7 @@ import CounterStore from "../counter/CounterContent";
 
 const Counter = () => {
   return (
-    <Provider store={counterStore}>
+    <Provider store={counterStore }>
       <CounterStore />
     </Provider>
   );

@@ -47,7 +47,7 @@ function Footer({ save }) {
       </button>
       <button
         type="button"
-        className="btn active:ring-blue-400 bg-blue-600 text-gray-50"
+        className="btn active:ring-blue-400 bg-blue-600 text-gray-50 disabled:cursor-not-allowed disabled:bg-blue-400"
         onClick={save}
         data-bs-dismiss="modal"
         disabled={!isValid}
@@ -62,7 +62,7 @@ function Modal({ title, children, save }) {
   return (
     <div className="fixed bg-gray-600/80 inset-0 flex h-screen items-center justify-center w-full z-50">
       <div
-        className="fade relative inset-auto z-10 block"
+        className="fade relative inset-auto z-10 block  min-w-[250px] w-full"
         id="addContact"
         tabIndex="-1"
         aria-labelledby="addContact"
