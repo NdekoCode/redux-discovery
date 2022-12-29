@@ -7,7 +7,7 @@ export function contactReducer(state = initialState, action) {
   const { ADD_CONTACT } = ACTIONS;
   switch (action.type) {
     case ADD_CONTACT:
-      return [action.payload, ...state];
+      return [action.payload, ...state.contacts];
     default:
       return state;
   }

@@ -5,6 +5,6 @@ export function addContact(contact) {
   const { ADD_CONTACT } = ACTIONS;
   return {
     type: ADD_CONTACT,
-    payload: contact,
+    payload: { contact },
   };
 }
