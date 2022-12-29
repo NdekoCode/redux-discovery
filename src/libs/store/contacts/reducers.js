@@ -1,7 +1,9 @@
-import { dataContacts } from "../../../components/contacts/libs/data";
+import { dataContacts } from "../../data/data";
 import { ACTIONS } from "./actions";
-
-export function contactReducer(state = dataContacts, action) {
+const initialState = {
+  contacts: dataContacts,
+};
+export function contactReducer(state = initialState, action) {
   const { ADD_CONTACT } = ACTIONS;
   switch (action.type) {
     case ADD_CONTACT:
