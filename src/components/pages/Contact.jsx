@@ -49,6 +49,7 @@ const Contact = () => {
     return !selectedFilter ? list : list.filterList(selectedFilter);
   }, [selectedFilter, list]);
   useEffect(() => {
+    document.title = "Mes contacts";
     ref.current.scrollTo({
       top: 0,
       behavior: "smooth",
