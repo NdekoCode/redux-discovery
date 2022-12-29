@@ -51,7 +51,7 @@ function AddContactModal({ addContact }) {
     <Modal save={save} title="Add New Contact :">
       <Components.Select
         name="category"
-        value={contact.first || ""}
+        value={contact.category || "business"}
         onChange={handleOnChange}
       >
         {filters.map((filter) => {
