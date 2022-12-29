@@ -1,13 +1,16 @@
 import ACTIONS from "./typesActions";
-
-export function counterReducer(state = 0, action) {
+const initialState = {
+  count: 0,
+};
+export function counterReducer(state = initialState, action) {
   const { INCREMENT, DECREMENT } = ACTIONS;
   switch (action.type) {
     case INCREMENT:
-      return state + 1;
+      return { ...state, count: state.count + 1 };
     case DECREMENT:
-      if (state > 0) {
-        return state - 1;
+      if (state.count > 0) {
+        console.log(state);
+        return { ...state, count: state.count - 1 };
       }
       return state;
     default:

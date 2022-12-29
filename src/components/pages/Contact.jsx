@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { dataContacts } from "../../libs/data/data";
+import { connect } from "react-redux";
 import "../../utils/utils";
 import Components from "../contacts";
 import AddContactModal from "../contacts/AddContactModal";
@@ -29,12 +29,8 @@ const styles = {
     opacity: 0.3,
   },
 };
-const Contact = () => {
+const Contact = ({ contacts }) => {
   const ref = createRef();
-  const [list, setList] = useState(dataContacts);
-  const addContact = useCallback((contact) => {
-    setList((prevState) => [contact, ...prevState]);
-  });
   const { isVisible, handleToggle } = useFormValidation();
   const filters = ["🏢 business", "👬 friends", "👪 family"];
   const [selectedFilter, setFilter] = useState(null);
@@ -46,8 +42,8 @@ const Contact = () => {
     setFilter(sub);
   });
   const contactsList = useMemo(() => {
-    return !selectedFilter ? list : list.filterList(selectedFilter);
-  }, [selectedFilter, list]);
+    return !selectedFilter ? contacts : contacts.filterList(selectedFilter);
+  }, [selectedFilter, contacts]);
   useEffect(() => {
     document.title = "Mes contacts";
     ref.current.scrollTo({
@@ -58,7 +54,7 @@ const Contact = () => {
   return (
     <div className="container md:w-full mx-auto mt-5 min-h-[500px]">
       {/* ajouter nouveau contact (modal) */}
-      {isVisible && <AddContactModal addContact={addContact} />}
+      {isVisible && <AddContactModal />}
       <div className="content flex justify-center items-center ">
         <div className="contacts-list  w-full list-group border border-gray-300 rounded-b-md rounded-t-md border-t-0">
           <a
@@ -105,5 +101,8 @@ const Contact = () => {
     </div>
   );
 };
-
-export default Contact;
+const mapStateToProps = ({ contacts }) => ({
+  contacts,
+});
+const ContactReduxStore = connect(mapStateToProps)(Contact);
+export default ContactReduxStore;

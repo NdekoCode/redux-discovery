@@ -1,3 +1,1 @@
-export const getCount = (state) => ({
-  count: state,
-});
+export const getCount = (state) => state;
