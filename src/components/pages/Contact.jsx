@@ -5,10 +5,10 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import AddContactModal from "../AddContactModal";
+import { dataContacts } from "../../libs/data/data";
+import "../../utils/utils";
 import Components from "../contacts";
-import { dataContacts } from "../contacts/libs/data";
-import "../contacts/libs/utils";
+import AddContactModal from "../contacts/AddContactModal";
 import Row from "../contacts/Row";
 import { useFormValidation } from "../hooks/useFormValidation";
 

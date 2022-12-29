@@ -1,4 +1,4 @@
-import "./libs/utils";
+import "../../utils/utils";
 
 const Components = {
   Input: function ({

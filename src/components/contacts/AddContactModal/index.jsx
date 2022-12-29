@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { v4 as uuid } from "uuid";
-import Components from "../contacts";
-import { useFormValidation } from "../hooks/useFormValidation";
+import Components from "..";
+import { useFormValidation } from "../../hooks/useFormValidation";
 import Modal from "./Modal";
 
 const initialState = {
