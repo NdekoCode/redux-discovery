@@ -31,8 +31,11 @@ const styles = {
 };
 const Contact = () => {
   const ref = createRef();
+  const [list, setList] = useState(dataContacts);
+  const addContact = useCallback((contact) => {
+    setList((prevState) => [contact, ...prevState]);
+  });
   const { isVisible, handleToggle } = useFormValidation();
-  console.log(handleToggle);
   const filters = ["🏢 business", "👬 friends", "👪 family"];
   const [selectedFilter, setFilter] = useState(null);
   const selectFilter = useCallback((filter) => {
@@ -43,11 +46,8 @@ const Contact = () => {
     setFilter(sub);
   });
   const contactsList = useMemo(() => {
-    if (!selectedFilter) {
-      return dataContacts;
-    }
-    return dataContacts.filterList(selectedFilter);
-  }, [selectedFilter, dataContacts]);
+    return !selectedFilter ? list : list.filterList(selectedFilter);
+  }, [selectedFilter, list]);
   useEffect(() => {
     ref.current.scrollTo({
       top: 0,
@@ -57,7 +57,7 @@ const Contact = () => {
   return (
     <div className="container md:w-full mx-auto mt-5 min-h-[500px]">
       {/* ajouter nouveau contact (modal) */}
-      {isVisible && <AddContactModal />}
+      {isVisible && <AddContactModal addContact={addContact} />}
       <div className="content flex justify-center items-center ">
         <div className="contacts-list  w-full list-group border border-gray-300 rounded-b-md rounded-t-md border-t-0">
           <a
