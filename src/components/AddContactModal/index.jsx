@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { v4 as uuid } from "uuid";
 import Components from "../contacts";
 import { useFormValidation } from "../hooks/useFormValidation";
 import Modal from "./Modal";
@@ -12,11 +13,30 @@ const initialState = {
   phone: null,
   category: "business",
 };
-function AddContactModal() {
+function AddContactModal({ addContact }) {
   const filters = ["business", "friends", "family"];
   const [contact, setContact] = useState({ ...initialState });
-  const { validate } = useFormValidation();
-  const save = useCallback(() => {}, []);
+  const { validate, isValid, handleToggle } = useFormValidation();
+  const save = useCallback(() => {
+    if (isValid) {
+      const newContact = {
+        id: uuid(),
+        name: `${contact.first} ${contact.last}`,
+        email: contact.email,
+        phone: contact.phone,
+        category: contact.category,
+      };
+      addContact(newContact);
+      setContact({
+        first: "",
+        last: "",
+        email: "",
+        phone: "",
+        category: "business",
+      });
+      handleToggle(false);
+    }
+  }, [contact, addContact]);
   const handleOnChange = useCallback((e) => {
     const [name, value] = [e.target.name, e.target.value];
     setContact((prevState) => ({

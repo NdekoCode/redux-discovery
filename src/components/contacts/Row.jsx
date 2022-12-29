@@ -49,7 +49,7 @@ const Row = memo((props) => {
         </p>
         <small className="text-gray-600">{contact.category}</small>
       </div>
-      <ul className="list-disc list-inside flex gap-2">
+      <ul className="list-disc list-inside gap-2">
         {!isEditing ? (
           <li className="text-gray-600 pl-3">{contact.email}</li>
         ) : (
