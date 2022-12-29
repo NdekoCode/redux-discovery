@@ -46,10 +46,7 @@ const Contact = () => {
     setFilter(sub);
   });
   const contactsList = useMemo(() => {
-    if (!selectedFilter) {
-      return list;
-    }
-    return list.filterList(selectedFilter);
+    return !selectedFilter ? list : list.filterList(selectedFilter);
   }, [selectedFilter, list]);
   useEffect(() => {
     ref.current.scrollTo({
