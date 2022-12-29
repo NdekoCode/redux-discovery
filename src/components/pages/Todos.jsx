@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import "../../App.css";
-import store from "../../store";
+import store from "../../libs/store";
 import { TodoFilterStore } from "../todos/TodoFilter";
 import { TodoListStore } from "../todos/TodoList";
 function Todos() {

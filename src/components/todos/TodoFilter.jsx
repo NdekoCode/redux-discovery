@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setFilterAction } from "../../store/filter/filterActions";
-import { filterSelector } from "../../store/filter/filterSelectors";
+import { setFilterAction } from "../../libs/store/filter/filterActions";
+import { filterSelector } from "../../libs/store/filter/filterSelectors";
 
 const TodoFilter = ({ filter, onChange }) => {
   return (
