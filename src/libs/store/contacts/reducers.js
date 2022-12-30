@@ -12,16 +12,19 @@ export function contactReducer(state = initialState, action) {
         contacts: [action.payload.contact, ...state.contacts],
       };
     case EDIT_CONTACT:
-      state.contacts.map((contact) => {
-        if (contact.id === action.payload.id) {
+      const contacts = state.contacts.map((contact) => {
+        if (contact.id.toString() === action.payload.id.toString()) {
+          console.log(action.payload);
           contact.name = action.payload.name;
           contact.email = action.payload.email;
           contact.phone = action.payload.phone;
           contact.category = action.payload.category;
+          console.log(contact);
+          return contact;
         }
         return contact;
       });
-      return state;
+      return { ...state, contacts };
     default:
       return state;
   }
