@@ -4,7 +4,7 @@ const initialState = {
   contacts: dataContacts,
 };
 export function contactReducer(state = initialState, action) {
-  const { ADD_CONTACT, EDIT_CONTACT } = ACTIONS;
+  const { ADD_CONTACT, EDIT_CONTACT, DELETE_CONTACT } = ACTIONS;
   switch (action.type) {
     case ADD_CONTACT:
       return {
@@ -25,6 +25,11 @@ export function contactReducer(state = initialState, action) {
         return contact;
       });
       return { ...state, contacts };
+    case DELETE_CONTACT:
+      const newContacts = state.contacts.filter(
+        (contact) => contact.id !== action.payload.id
+      );
+      return { ...state, contacts: newContacts };
     default:
       return state;
   }

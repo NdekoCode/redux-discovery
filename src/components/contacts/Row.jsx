@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useState } from "react";
 import { connect } from "react-redux";
 import Components from ".";
-import { editContact } from "../../libs/store/contacts/actions";
+import { deleteContact, editContact } from "../../libs/store/contacts/actions";
 import ButtonEdit from "./ButtonEdit";
 import RemoveButton from "./RemoveButton";
 import SaveButton from "./SaveButton";
@@ -29,6 +29,10 @@ const Row = memo(({ edit, remove, contact }) => {
     const input = window.confirm(
       "are you sure you want to delete this contact ?"
     );
+    console.log(Boolean(input));
+    if (Boolean(input)) {
+      remove(contactItem);
+    }
   });
   const show = useCallback(() => setVisible(true), [isVisible]);
   const hide = useCallback(() => setVisible(false), [isVisible]);
@@ -105,6 +109,7 @@ const Row = memo(({ edit, remove, contact }) => {
 });
 const mapDispatchToProps = (dispatch) => ({
   edit: (contact) => dispatch(editContact(contact)),
+  remove: (contact) => dispatch(deleteContact(contact)),
 });
 const RowStore = connect(null, mapDispatchToProps)(Row);
 export default RowStore;
