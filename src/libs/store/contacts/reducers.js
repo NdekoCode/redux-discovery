@@ -12,7 +12,6 @@ export function contactReducer(state = initialState, action) {
         contacts: [action.payload.contact, ...state.contacts],
       };
     default:
-      console.log(state);
       return state;
   }
 }

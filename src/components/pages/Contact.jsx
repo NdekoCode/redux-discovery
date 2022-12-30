@@ -12,23 +12,6 @@ import AddContactModal from "../contacts/AddContactModal";
 import Row from "../contacts/Row";
 import { useFormValidation } from "../hooks/useFormValidation";
 
-const styles = {
-  h1: {
-    margin: 0,
-    textDecoration: "underline",
-    fontWeight: "400",
-  },
-  buttons: {
-    width: "20%",
-    fontSize: 20,
-    display: "inline-flex",
-    justifyContent: "space-around",
-  },
-  disabled: {
-    cursor: "not-allowed",
-    opacity: 0.3,
-  },
-};
 const Contact = ({ contacts }) => {
   const ref = createRef();
   const { isVisible, handleToggle } = useFormValidation();
